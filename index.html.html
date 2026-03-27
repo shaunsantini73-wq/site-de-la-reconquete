@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Énigme spatiale</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #001f4d;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Étoiles animées */
+        .stars {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: transparent;
+            animation: moveStars 60s linear infinite;
+        }
+
+        .stars::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            box-shadow:
+                50px 100px white,
+                150px 200px white,
+                300px 50px white,
+                400px 300px white,
+                600px 150px white,
+                800px 250px white,
+                1000px 100px white,
+                1200px 200px white,
+                200px 400px white,
+                700px 350px white,
+                900px 50px white,
+                1100px 300px white,
+                1300px 150px white,
+                1400px 250px white,
+                1600px 100px white,
+                1700px 300px white;
+        }
+
+        @keyframes moveStars {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-500px);
+            }
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        .enigme {
+            margin-top: 30px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .formulaire {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #affichageNom {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+    <h1>Bravo tu as réussi la première énigme</h1>
+
+    <div class="enigme">
+Voici la seconde :
+
+Je suis un être vivant,
+Mais je n’ai jamais marché sur la Lune.
+
+Je suis partie avant les humains,
+Dans une époque de rivalité entre grandes puissances.
+
+Je n’étais ni astronaute, ni scientifique,
+Pourtant mon voyage a marqué l’histoire.
+
+Je n’ai jamais revu la Terre,
+Mais mon nom reste célèbre dans la conquête spatiale.
+
+Qui suis-je ?
+    </div>
+</div>
+
+<div class="formulaire">
+    <input type="text" id="nomInput" placeholder="Entre ton nom et prénom">
+    <button onclick="sauvegarderNom()">Valider</button>
+
+    <div id="affichageNom"></div>
+</div>
+
+<script>
+    window.onload = function() {
+        let nom = localStorage.getItem("nomUtilisateur");
+        if (nom) {
+            document.getElementById("affichageNom").innerText = "Dernier joueur : " + nom;
+        }
+    }
+
+    function sauvegarderNom() {
+        let nom = document.getElementById("nomInput").value;
+        localStorage.setItem("nomUtilisateur", nom);
+        document.getElementById("affichageNom").innerText = "Dernier joueur : " + nom;
+    }
+</script>
+
+</body>
+</html>
